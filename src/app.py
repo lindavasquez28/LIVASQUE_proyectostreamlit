@@ -1,11 +1,18 @@
 import streamlit as st
 import pickle
+import os # <--- 1. Agregamos esta librería básica de Python
 
-# Cargar el modelo que ya tenia
-archivo_modelo = open("../models/modelo_listo.pkl", "rb")
-modelo = pickle.load(archivo_modelo)
-archivo_modelo.close()
+# 2. Le decimos a Python que averigüe dónde está guardado este 'app.py'
+carpeta_actual = os.path.dirname(__file__)
 
+# 3. Creamos la ruta correcta hacia el modelo combinando las carpetas
+ruta_modelo = os.path.join(carpeta_actual, "../models/modelo_listo.pkl")
+
+# 4. Cargamos el modelo usando esa ruta inteligente
+with open(ruta_modelo, "rb") as archivo_modelo:
+    modelo = pickle.load(archivo_modelo)
+
+# Diccionario sencillo para traducir el número a nombre de flor
 nombres_flores = {
     0: "Iris Setosa",
     1: "Iris Versicolor",
